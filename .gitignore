@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+game/chinmay/
+game/yolov3-tiny.weights
+game/yolov3.cfg
+game/coco.names
+
+yolo-tiny.cfg
+yolov-tiny.weights
+yolov3.cfg
+yolov3-tiny.weights
+coco.names

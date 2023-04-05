@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Object Detection Game</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .score {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .object {
+            font-size: 4em;
+        }
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    </head>
+  
+</head>
+
+<body>
+    <div class="center">
+        <h1>Object Detection Game</h1>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="object">Bring the object: <span id="current_object"></span></div>
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+    <script>
+        var current_object = "";
+
+        function updateScore(score) {
+            document.getElementById("score").innerHTML = score;
+        }
+
+        function updateObject(object) {
+            document.getElementById("current_object").innerHTML = object;
+        }
+
+        function detectObject(object_name) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{{ url_for('detect_object') }}");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        updateScore(parseInt(xhr.responseText));
+                        current_object = "";
+                        updateObject(current_object);
+                    } else {
+                        console.log("There was a problem with the request.");
+                    }
+                }
+            };
+            xhr.send("object_name=" + object_name);
+        }
+
+        var source = new EventSource("{{ url_for('video_feed') }}");
+        source.onmessage = function(event) {
+            document.getElementById("video_feed").src = "data:image/jpeg;base64," + event.data;
+            updateObject(current_object);
+        };
+
+        setInterval(function() {
+            if (current_object === "") {
+                current_object = objects[Math.floor(Math.random() * objects.length)];
+                updateObject("Bring the object: " + current_object);
+            }
+        }, 5000);
+
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") {
+                detectObject(current_object);
+            }
+        });
+
+        var objects = [
+            "cell phone"
+        ];
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
