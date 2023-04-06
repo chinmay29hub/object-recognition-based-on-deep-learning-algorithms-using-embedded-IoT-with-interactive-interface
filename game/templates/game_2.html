@@ -6,18 +6,31 @@
   </head>
   </head>
   <body>
+    <div class="container text-center">
+
     <h1>Object Detection</h1>
     <p>Click the button to capture an image and detect objects in it.</p>
-    <img id="object-image" src="" width="640" height="480">
-    <ul id="object-list"></ul>
-    <button id="capture-btn">Capture and Detect Objects</button>
+    <div class="row row-cols-auto">
+      <div id="sample" class="col">
+    <img style="vertical-align: unset;" class="img-fluid" id="object-image" src="" width="640" height="480">
+      </div>
+    <div class="col">
     <div id="display"></div>
+  </div>
+    <button id="capture-btn">Capture and Detect Objects</button>
+    </div>
+
+    <ul id="object-list"></ul>
+
+
 
     <script>
       const video = document.createElement('video');
+      video.setAttribute("class", "img-fluid")
       video.width = 640;
       video.height = 480;
-      document.body.appendChild(video);
+      const display = document.getElementById("sample")
+      display.appendChild(video);
 
       const img = document.getElementById('object-image');
       const list = document.getElementById('object-list');
@@ -59,7 +72,7 @@
           d = document.getElementById("display")
           for (const object of data.objects_detected) {
 
-            const url = `https://api.unsplash.com/photos/random?query=${object}&client_id=viePvGMjiWwkW4bW3_gKQztYHRy98h91BhqXfyGSRwM`;
+            const url = `https://api.unsplash.com/photos/random?query=${object}&client_id=yN-cmhI6goXY-OtIMg5V_MMsc8BaSJF0GiifHJkT1dQ`;
             // const imageDiv = document.getElementById("myDiv")
             fetch(url)
               .then(response => {

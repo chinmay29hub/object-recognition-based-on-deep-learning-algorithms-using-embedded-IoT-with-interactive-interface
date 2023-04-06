@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Object Detection Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     <style>
         .center {
             text-align: center;
@@ -27,8 +28,10 @@
     <div class="center">
         <h1>Object Detection Game</h1>
         <div class="score">Score: <span id="score">0</span></div>
-        <div class="object">Bring the object: <span id="current_object"></span></div>
-        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+        <div class="object"><span id="current_object"></span></div>
+        <div class="shadow">
+            <img class="img-fluid img" src="{{ url_for('video_feed') }}" width="640" height="480">
+        </div>
     </div>
     <script>
         var current_object = "";
@@ -79,7 +82,56 @@
         });
 
         var objects = [
-            "cell phone"
+        "person",
+        "car",
+        "motorbike",
+        "aeroplane",
+        "bus",
+        "train",
+        "truck",
+        "bird",
+        "cat",
+        "dog",
+        "backpack",
+        "umbrella",
+        "handbag",
+        "tie",
+        "suitcase",
+        "frisbee",
+        "sports ball",
+        "kite",
+        "bicycle",
+        "tennis racket",
+        "bottle",
+        "cup",
+        "fork",
+        "spoon",
+        "bowl",
+        "banana",
+        "apple",
+        "sandwich",
+        "orange",
+        "broccoli",
+        "carrot",
+        "hot dog",
+        "pizza",
+        "donut",
+        "chair",
+        "sofa",
+        "pottedplant",
+        "bed",
+        "tvmonitor",
+        "laptop",
+        "mouse",
+        "remote",
+        "keyboard",
+        "cell phone",
+        "book",
+        "clock",
+        "scissors",
+        "teddy bear",
+        "hair drier",
+        "toothbrush"
         ];
     </script>
 
