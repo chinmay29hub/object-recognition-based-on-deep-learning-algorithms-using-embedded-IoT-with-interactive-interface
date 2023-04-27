@@ -9,7 +9,7 @@ with open("coco.names", "r") as f:
     classes = f.read().splitlines()
 
 # load image
-img = cv2.imread('cars.jpg')
+img = cv2.imread('./object_img/8.jpg')
 
 height, width, _ = img.shape
 
@@ -49,10 +49,17 @@ if len(indexes)>0:
         label = str(classes[class_ids[i]])
         confidence = (confidences[i])
         color = colors[class_ids[i]]
-        cv2.rectangle(img, (x,y), (x+w, y+h), color, 2)
-        cv2.putText(img, label + " " + str(round(confidence, 2)), (x, y+30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+        cv2.rectangle(img, (x,y), (x+w, y+h), color, 20)
+        cv2.putText(img, label + " " + str(round(confidence, 20)), (x, y+30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+
+# resize the image to a smaller size
+scale_percent = 50 # percent of original size
+width = 500
+height = 500
+dim = (width, height)
+img_resized = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
 # display the output image
-cv2.imshow('Detected Image', img)
+cv2.imshow('Detected Image', img_resized)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
