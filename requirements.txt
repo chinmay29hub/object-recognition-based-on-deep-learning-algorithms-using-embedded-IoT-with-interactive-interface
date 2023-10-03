@@ -99,7 +99,7 @@ ubuntu-advantage-tools==8001
 ubuntu-drivers-common==0.0.0
 ufw==0.36.1
 unattended-upgrades==0.1
-urllib3==1.26.12
+urllib3==1.26.17
 usb-creator==0.3.16
 uvloop==0.17.0
 vboxapi==1.0
