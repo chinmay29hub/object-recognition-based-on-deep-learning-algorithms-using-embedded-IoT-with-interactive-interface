@@ -46,7 +46,7 @@ lazr.uri==1.0.6
 lockfile==0.12.2
 louis==3.24.0
 Mako==1.2.4.dev0
-markdown-it-py==2.1.0
+markdown-it-py==2.2.0
 MarkupSafe==2.1.2
 mdurl==0.1.2
 monotonic==1.6
